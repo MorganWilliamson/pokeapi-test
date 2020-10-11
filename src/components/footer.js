@@ -7,7 +7,7 @@ const StyledFooter = styled.div`
 `
 
 function Footer(props) {
-    console.log(props);
+   // console.log(props);
 
 
     return (<StyledFooter>

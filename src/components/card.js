@@ -7,10 +7,13 @@ const StyledCard = styled.div`
 `
 
 function Card(props) {
-    console.log(props);
+    //console.log(props)
 
     return (<StyledCard>
-            
+                <div>
+                    <p>Name: {props.pokeData.name}</p>
+                    <p>Pokédex #: {props.pokeData.id}</p>
+                </div>
             </StyledCard>)
 }
 

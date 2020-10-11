@@ -9,10 +9,10 @@ const StyledHeader = styled.div`
 
 
 function Header(props) {
-    console.log(props)
+    //console.log(props)
 
     return (<StyledHeader>
-                <h2>PokeAPI Test</h2>
+                <h2>PokéAPI</h2>
             </StyledHeader>)
 }
 

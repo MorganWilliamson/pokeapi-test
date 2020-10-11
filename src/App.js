@@ -8,11 +8,11 @@ import Card from './components/card'
 
 function App() {
 
-  const [pokeData, setPokeData] = useState(null)
+  const [pokeData, setPokeData] = useState([])
   
   
   useEffect(() => {
-        axios.get('url')
+        axios.get('https://pokeapi.co/api/v2/pokemon/bulbasaur')
           .then((res) => {
             setPokeData(res.data)
           })
