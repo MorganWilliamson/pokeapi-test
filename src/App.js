@@ -12,7 +12,7 @@ function App() {
   
   
   useEffect(() => {
-        axios.get('https://pokeapi.co/api/v2/pokemon/bulbasaur')
+        axios.get('URL')
           .then((res) => {
             setPokeData(res.data)
           })
