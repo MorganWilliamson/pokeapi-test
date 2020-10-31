@@ -1,10 +1,16 @@
-import React, { useState, useEffect } from 'react';
-import './App.css';
-import axios from 'axios';
-import Header from './components/header'
-import Footer from './components/footer'
-import Card from './components/card'
+//React Imports
+import React, { useState, useEffect } from "react";
+import { Route, Switch } from "react-router-dom";
+import axios from "axios";
 
+//Component Imports
+import Header from "./components/header";
+import Footer from "./components/footer";
+import Card from "./components/card";
+import Pokedex from "./components/Pokedex";
+
+//Style Import
+import "./App.css";
 
 function App() {
 
@@ -25,6 +31,13 @@ function App() {
 
   return (
     <div className="App">
+    <Switch>
+      {/* Rendering for main page */}
+      <Route exact path="/" render={(props) => <Pokedex {...props} />} />
+      {/* Rendering for individual cards */}
+      <Route exact path="/:pokemonId" render={(props) => <Card {...props}/>} />
+    </Switch>
+
       <Header />
         <Card pokeData={pokeData} />
       <Footer />

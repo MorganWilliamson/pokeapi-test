@@ -1,5 +1,6 @@
 import React from 'react'
 import styled from 'styled-components'
+import { Toolbar } from "@material-ui/core";
 
 const StyledHeader = styled.div`
     height: 15vh;
@@ -8,10 +9,11 @@ const StyledHeader = styled.div`
 `
 
 
-function Header(props) {
-    //console.log(props)
+function Header() {
+    
 
     return (<StyledHeader>
+                <Toolbar />
                 <h2>PokéAPI</h2>
             </StyledHeader>)
 }

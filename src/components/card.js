@@ -7,13 +7,12 @@ const StyledCard = styled.div`
 `
 
 function Card(props) {
-    //console.log(props)
+    // const { match } = props;
+    // const { params } = match;
+    // const { pokemonId } = params;
 
     return (<StyledCard>
-                <div>
-                    <p>Name: {props.pokeData.name}</p>
-                    <p>Pokédex #: {props.pokeData.id}</p>
-                </div>
+               <p>Placeholder</p>
             </StyledCard>)
 }
 
