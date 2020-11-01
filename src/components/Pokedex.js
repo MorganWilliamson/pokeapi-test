@@ -1,26 +1,34 @@
+//React
 import React, { useState, useEffect } from "react";
 import axios from "axios";
-import { Grid, Card, CardContent, CardMedia, Typography, CircularProgress } from "@material-ui/core";
+//MUI
+import { Grid, Card, CardContent, CardMedia, CircularProgress, TextField, Toolbar, Typography } from "@material-ui/core";
+import SearchIcon from "@material-ui/icons/Search";
+import { fade, makeStyles } from "@material-ui/core/styles";
 //Components
 import PokeCard from "./card";
 import { toFirstCharUppercase } from "./constants";
-//Mock data
-import mockData from "./mockData";
 
 
 export default function Pokedex(props) {
-    const { history } = props;
     //Set state
-    const [pokeData, setPokeData] = useState(mockData)
+    const [pokeData, setPokeData] = useState({})
   
     //API call
     useEffect(() => {
-          axios.get(`URL`)
-            .then((res) => {
-              setPokeData(res.data)
-            })
-            .catch((error) => {
-              console.log(error)
+          axios.get(`https://pokeapi.co/api/v2/pokemon?limit=151`)
+            .then(function (res) {
+                const { data } = res;
+                const { results } = data;
+                const newPokeData = {};
+                results.forEach((pokemon, index) => {
+                    newPokeData[index + 1] = {
+                        id: index + 1,
+                        name: pokemon.name, 
+                        sprite: `https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/${index + 1}.png`
+                    }
+                })
+                setPokeData(newPokeData)
             })
         }, []);
     
@@ -28,12 +36,11 @@ export default function Pokedex(props) {
     //Card/Grid generation
     const getPokeCard = (pokemonId) => {
        //Prop destructure
-        const { id, name } = pokeData[`${pokemonId}`];
-        const { sprite } = `https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/${id}.png`
+        const { id, name, sprite } = pokeData[pokemonId];
 
         return (
             <Grid item xs={4} key={pokemonId}>
-                <Card onClick={() => history.push(`/${pokemonId}`)}>
+                <Card onClick={() => History.push(`/${pokemonId}`)}>
                     <CardMedia 
                         className="cardMedia"
                         image={sprite}
@@ -50,6 +57,15 @@ export default function Pokedex(props) {
     
     return (
         <>
+        <Toolbar>
+            <div className="searchContainer">
+                <SearchIcon className="searchIcon" />
+                <TextField className="searchInput" 
+                    label="Pokémon"
+                    variant="standard"
+                />
+            </div>
+        </Toolbar>
         <PokeCard pokeData={pokeData} />
         {pokeData ? (
             <Grid>
@@ -61,3 +77,33 @@ export default function Pokedex(props) {
         </>
     )
 }
+
+//Styles
+
+const useStyles = makeStyles((theme) => ({
+    pokedexContainer: {
+        paddingTop: "20px",
+        paddingLeft: "50px",
+        paddingRight: "50px",
+    },
+    cardMedia: {
+        margin: "auto",
+    }, 
+    cardContent: {
+        textAlign: "center",
+    },
+    searchContainer: {
+        display: "flex",
+        backgroundColor: fade(theme.palette.common.white, 0.15),
+        padding: "0px, 20px",
+        margin: "5px, 0px",
+    },
+    searchIcon: {
+        alignSelf: "flex-end",
+        marginBottom: "5px",
+    },
+    searchInput: {
+        width: "200px",
+        margin: "5px",
+    },
+}));

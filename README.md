@@ -6,4 +6,4 @@
 
 ## Keep in mind that {name} could be replaced with {id}, which would open up more search functionality. ##
 
-# é 
+# é
