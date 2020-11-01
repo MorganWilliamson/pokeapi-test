@@ -29,8 +29,8 @@ function PokeCard(props) {
                 setPokemon(false)})
     }, [pokemonId])
 
-    const generateJSX = (pokemon) => {
-        const { name, id, species, height, weight, types, sprites } = pokemon;
+    const generateJSX = (props) => {
+        const { name, id, species, height, weight, types, sprites } = props;
         const fullImageUrl = `https://pokeres.bastionbot.org/images/pokemon/${id}.png`;
         const { front_default } = sprites;
 
@@ -70,4 +70,4 @@ function PokeCard(props) {
 }
 
 
-export default PokeCard
+export default PokeCard;

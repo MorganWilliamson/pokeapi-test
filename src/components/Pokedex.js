@@ -12,8 +12,14 @@ import { toFirstCharUppercase } from "./constants";
 
 export default function Pokedex(props) {
     //Set state
-    const [pokeData, setPokeData] = useState({})
+    const [pokeData, setPokeData] = useState({});
+    const [filter, setFilter] = useState("");
   
+    //Search input function
+    const handleSearchChange = (e) => {
+        setFilter(e.target.value);
+    }
+
     //API call
     useEffect(() => {
           axios.get(`https://pokeapi.co/api/v2/pokemon?limit=151`)
@@ -63,6 +69,7 @@ export default function Pokedex(props) {
                 <TextField className="searchInput" 
                     label="Pokémon"
                     variant="standard"
+                    onChange={handleSearchChange}
                 />
             </div>
         </Toolbar>
@@ -70,6 +77,7 @@ export default function Pokedex(props) {
         {pokeData ? (
             <Grid>
                 {Object.keys(pokeData).map(pokemonId => 
+                pokeData[pokemonId].name.includes(filter) &&
                     getPokeCard(pokemonId))}
             </Grid>
         ) : (<CircularProgress /> )}

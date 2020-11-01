@@ -12,7 +12,7 @@ import Pokedex from "./components/Pokedex";
 import "./App.css";
 
 
-function App() {
+const App = () => {
   return (
     <div className="App">
       {/* Rendering Header element */}
