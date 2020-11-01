@@ -6,7 +6,6 @@ import { Grid, Card, CardContent, CardMedia, CircularProgress, TextField, Toolba
 import SearchIcon from "@material-ui/icons/Search";
 import { fade, makeStyles } from "@material-ui/core/styles";
 //Components
-import PokeCard from "./card";
 import { toFirstCharUppercase } from "./constants";
 
 
@@ -104,7 +103,6 @@ const Pokedex = (props) => {
                 />
             </div>
         </Toolbar>
-        <PokeCard pokeData={pokeData} />
         {pokeData ? (
             <Grid container spacing={2} className={classes.pokedexContainer}>
                 {Object.keys(pokeData).map(pokemonId => 
