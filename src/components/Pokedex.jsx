@@ -10,84 +10,7 @@ import PokeCard from "./card";
 import { toFirstCharUppercase } from "./constants";
 
 
-export default function Pokedex(props) {
-    //Set state
-    const [pokeData, setPokeData] = useState({});
-    const [filter, setFilter] = useState("");
-  
-    //Search input function
-    const handleSearchChange = (e) => {
-        setFilter(e.target.value);
-    }
-
-    //API call
-    useEffect(() => {
-          axios.get(`https://pokeapi.co/api/v2/pokemon?limit=151`)
-            .then(function (res) {
-                const { data } = res;
-                const { results } = data;
-                const newPokeData = {};
-                results.forEach((pokemon, index) => {
-                    newPokeData[index + 1] = {
-                        id: index + 1,
-                        name: pokemon.name, 
-                        sprite: `https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/${index + 1}.png`
-                    }
-                })
-                setPokeData(newPokeData)
-            })
-        }, []);
-    
-  
-    //Card/Grid generation
-    const getPokeCard = (pokemonId) => {
-       //Prop destructure
-        const { id, name, sprite } = pokeData[pokemonId];
-
-        return (
-            <Grid item xs={4} key={pokemonId}>
-                <Card onClick={() => History.push(`/${pokemonId}`)}>
-                    <CardMedia 
-                        className="cardMedia"
-                        image={sprite}
-                        style={{ width: "130px", height: "130px"}}
-                    />
-                    <CardContent className="cardContent">
-                        <Typography>{`${id}.${toFirstCharUppercase(name)}`}</Typography>
-                    </CardContent>
-                </Card>
-            </Grid>
-        )
-    }
-  
-    
-    return (
-        <>
-        <Toolbar>
-            <div className="searchContainer">
-                <SearchIcon className="searchIcon" />
-                <TextField className="searchInput" 
-                    label="Pokémon"
-                    variant="standard"
-                    onChange={handleSearchChange}
-                />
-            </div>
-        </Toolbar>
-        <PokeCard pokeData={pokeData} />
-        {pokeData ? (
-            <Grid>
-                {Object.keys(pokeData).map(pokemonId => 
-                pokeData[pokemonId].name.includes(filter) &&
-                    getPokeCard(pokemonId))}
-            </Grid>
-        ) : (<CircularProgress /> )}
-
-        </>
-    )
-}
-
 //Styles
-
 const useStyles = makeStyles((theme) => ({
     pokedexContainer: {
         paddingTop: "20px",
@@ -115,3 +38,84 @@ const useStyles = makeStyles((theme) => ({
         margin: "5px",
     },
 }));
+
+const Pokedex = (props) => {
+    const { history } = props;
+    const classes = useStyles();
+    //Set state
+    const [pokeData, setPokeData] = useState({});
+    const [filter, setFilter] = useState("");
+  
+    //Search input function
+    const handleSearchChange = (e) => {
+        setFilter(e.target.value);
+    }
+
+    //API call
+    useEffect(() => {
+          axios.get(`https://pokeapi.co/api/v2/pokemon?limit=807`)
+            .then((res) => {
+                const { data } = res;
+                const { results } = data;
+                const newPokeData = {};
+                results.forEach((pokemon, index) => {
+                    newPokeData[index + 1] = {
+                        id: index + 1,
+                        name: pokemon.name, 
+                        sprite: `https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/${index + 1}.png`
+                    }
+                })
+                setPokeData(newPokeData)
+            })
+        }, []);
+    
+  
+    //Card/Grid generation
+    const getPokeCard = (pokemonId) => {
+       //Prop destructure
+        const { id, name, sprite } = pokeData[pokemonId];
+
+        return (
+            <Grid item xs={4} key={pokemonId}>
+                <Card onClick={() => history.push(`/${id}`)}>
+                    <CardMedia 
+                        className={classes.cardMedia}
+                        image={sprite}
+                        style={{ width: "130px", height: "130px"}}
+                    />
+                    <CardContent className={classes.cardContent}>
+                        <Typography>{`${id}.${toFirstCharUppercase(name)}`}</Typography>
+                    </CardContent>
+                </Card>
+            </Grid>
+        )
+    }
+  
+    
+    return (
+        <>
+        <Toolbar>
+            <div className={classes.searchContainer}>
+                <SearchIcon className={classes.searchIcon} />
+                <TextField className={classes.searchInput} 
+                    label="Pokémon"
+                    variant="standard"
+                    onChange={handleSearchChange}
+                />
+            </div>
+        </Toolbar>
+        <PokeCard pokeData={pokeData} />
+        {pokeData ? (
+            <Grid container spacing={2} className={classes.pokedexContainer}>
+                {Object.keys(pokeData).map(pokemonId => 
+                    pokeData[pokemonId].name.includes(filter) &&
+                        getPokeCard(pokemonId)
+                    )}
+            </Grid>
+        ) : (<CircularProgress /> )}
+
+        </>
+    )
+}
+
+export default Pokedex;

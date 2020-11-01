@@ -7,30 +7,26 @@ import { toFirstCharUppercase } from "./constants";
 const StyledCard = styled.div`
     height: 70vh;
     background: #222224;
-`
+`;
 
-function PokeCard(props) {
-    // const { match, history } = props;
-    // const { params } = match;
-    // set pokemonId back to params if you uncomment
-    const { pokemonId } = props;
-
+const PokeCard = (props) => {
+    const { match, history } = props;
+    const { params } = match;
+    const { pokemonId} = params;
     const [pokemon, setPokemon] = useState(undefined)
 
     useEffect(() => {
         axios.get(`https://pokeapi.co/api/v2/pokemon/${pokemonId}/`)
             .then((res) => {
-                const { data } = res;
-                console.log(data)
-                setPokemon(data)
+                setPokemon(res.data)
             })
             .catch((error) => {
                 console.log(error);
                 setPokemon(false)})
-    }, [pokemonId])
+    }, [pokemonId]);
 
-    const generateJSX = (props) => {
-        const { name, id, species, height, weight, types, sprites } = props;
+    const generateJSX = (pokemon) => {
+        const { name, id, species, height, weight, types, sprites } = pokemon;
         const fullImageUrl = `https://pokeres.bastionbot.org/images/pokemon/${id}.png`;
         const { front_default } = sprites;
 
@@ -62,7 +58,7 @@ function PokeCard(props) {
                 {pokemon === false && <p>Pokémon not found.</p>}
 
                 {pokemon !== undefined && (
-                    <Button variant="contained" onClick={() => History.push("/")}>
+                    <Button variant="contained" onClick={() => history.push("/")}>
                         Back to Pokédex
                     </Button>
                 )}
