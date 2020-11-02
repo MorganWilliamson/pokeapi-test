@@ -15,6 +15,8 @@ const useStyles = makeStyles((theme) => ({
         paddingTop: "20px",
         paddingLeft: "50px",
         paddingRight: "50px",
+        height: "70%",
+        background: "#222224",
     },
     cardMedia: {
         margin: "auto",
@@ -25,8 +27,10 @@ const useStyles = makeStyles((theme) => ({
     searchContainer: {
         display: "flex",
         backgroundColor: fade(theme.palette.common.white, 0.15),
-        padding: "0px, 20px",
-        margin: "5px, 0px",
+        paddingLeft: "20px",
+        paddingRight: "20px",
+        marginTop: "5px",
+        marginBottom: "5px",
     },
     searchIcon: {
         alignSelf: "flex-end",
@@ -52,7 +56,7 @@ const Pokedex = (props) => {
 
     //API call
     useEffect(() => {
-          axios.get(`https://pokeapi.co/api/v2/pokemon?limit=807`)
+          axios.get(`https://pokeapi.co/api/v2/pokemon?limit=10`)
             .then((res) => {
                 const { data } = res;
                 const { results } = data;

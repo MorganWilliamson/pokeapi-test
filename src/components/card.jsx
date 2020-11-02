@@ -1,13 +1,8 @@
 import React, { useState, useEffect } from "react";
 import axios from "axios";
-import styled from "styled-components";
 import { Typography, CircularProgress, Button } from "@material-ui/core";
 import { toFirstCharUppercase } from "./constants";
 
-const StyledCard = styled.div`
-    height: 70vh;
-    background: #222224;
-`;
 
 const PokeCard = (props) => {
     const { match, history } = props;
@@ -17,8 +12,9 @@ const PokeCard = (props) => {
 
     useEffect(() => {
         axios.get(`https://pokeapi.co/api/v2/pokemon/${pokemonId}/`)
-            .then((res) => {
-                setPokemon(res.data)
+            .then(function (response) {
+                const { data } = response;
+                setPokemon(data)
             })
             .catch((error) => {
                 console.log(error);
@@ -52,7 +48,7 @@ const PokeCard = (props) => {
         )
     }
 
-    return (<StyledCard>
+    return (<>
                 {pokemon === undefined && <CircularProgress />}
                 {pokemon !== undefined && generateJSX()}
                 {pokemon === false && <p>Pokémon not found.</p>}
@@ -62,7 +58,7 @@ const PokeCard = (props) => {
                         Back to Pokédex
                     </Button>
                 )}
-            </StyledCard>)
+            </>)
 }
 
 

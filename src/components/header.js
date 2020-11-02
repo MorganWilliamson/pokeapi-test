@@ -13,8 +13,8 @@ function Header() {
     
 
     return (<StyledHeader>
+                <h2>Pokédex</h2>
                 <Toolbar />
-                <h2>PokéAPI</h2>
             </StyledHeader>)
 }
 
