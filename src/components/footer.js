@@ -6,12 +6,12 @@ const StyledFooter = styled.div`
     background: #f0f0f0;
 `
 
-function Footer(props) {
-    console.log(props);
+function Footer() {
+   // console.log(props);
 
 
     return (<StyledFooter>
-
+            <p>footer</p>
             </StyledFooter>)
 }
 

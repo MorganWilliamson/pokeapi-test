@@ -1,32 +1,29 @@
-import React, { useState, useEffect } from 'react';
-import './App.css';
-import axios from 'axios';
-import Header from './components/header'
-import Footer from './components/footer'
-import Card from './components/card'
+//React Imports
+import React from "react";
+import { Route, Switch } from "react-router-dom";
+
+//Component Imports
+import Header from "./components/header";
+import Footer from "./components/footer";
+import PokeCard from "./components/card.jsx";
+import Pokedex from "./components/Pokedex.jsx";
+
+//Style Import
+import "./App.css";
 
 
-function App() {
-
-  const [pokeData, setPokeData] = useState(null)
-  
-  
-  useEffect(() => {
-        axios.get('url')
-          .then((res) => {
-            setPokeData(res.data)
-          })
-          .catch((error) => {
-            console.log(error)
-          })
-      }, []);
-
-      
-
+const App = () => {
   return (
     <div className="App">
+      {/* Rendering Header element */}
       <Header />
-        <Card pokeData={pokeData} />
+
+      <Switch>
+        <Route exact path="/" render={(props) => <Pokedex {...props} />} />
+        <Route exact path="/:pokemonId" render={(props) => <PokeCard {...props}/>} />
+      </Switch>
+        
+      {/* Rendering Footer element */}
       <Footer />
     </div>
   );
