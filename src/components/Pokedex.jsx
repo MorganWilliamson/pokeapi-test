@@ -40,6 +40,10 @@ const useStyles = makeStyles((theme) => ({
         width: "200px",
         margin: "5px",
     },
+    typography: {
+        fontFamily: "sans-serif", 
+        padding: "5%",
+    }
 }));
 
 const Pokedex = (props) => {
@@ -56,7 +60,7 @@ const Pokedex = (props) => {
 
     //API call
     useEffect(() => {
-          axios.get(`https://pokeapi.co/api/v2/pokemon?limit=10`)
+          axios.get(`https://pokeapi.co/api/v2/pokemon?limit=893`)
             .then((res) => {
                 const { data } = res;
                 const { results } = data;
@@ -80,14 +84,15 @@ const Pokedex = (props) => {
 
         return (
             <Grid item xs={4} key={pokemonId}>
-                <Card onClick={() => history.push(`/${id}`)}>
+                {/* Put in Card: onClick={() => history.push(`/${id}`)} */}
+                <Card >
                     <CardMedia 
                         className={classes.cardMedia}
                         image={sprite}
                         style={{ width: "130px", height: "130px"}}
                     />
                     <CardContent className={classes.cardContent}>
-                        <Typography>{`${id}.${toFirstCharUppercase(name)}`}</Typography>
+                            <Typography className={classes.typography} >{`${id}.${toFirstCharUppercase(name)}`}</Typography>
                     </CardContent>
                 </Card>
             </Grid>

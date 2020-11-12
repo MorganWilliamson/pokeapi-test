@@ -2,8 +2,7 @@ import React from 'react'
 import styled from 'styled-components'
 
 const StyledFooter = styled.div`
-    height: 15vh;
-    background: #f0f0f0;
+    height: 5vh;
 `
 
 function Footer() {
@@ -11,7 +10,8 @@ function Footer() {
 
 
     return (<StyledFooter>
-            <p>footer</p>
+            <p>Made with data from https://pokeapi.co/ </p>
+            <p>Morgan Williamson, 2020</p>
             </StyledFooter>)
 }
 

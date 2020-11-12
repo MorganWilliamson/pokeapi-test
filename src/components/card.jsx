@@ -3,12 +3,11 @@ import axios from "axios";
 import { Typography, CircularProgress, Button } from "@material-ui/core";
 import { toFirstCharUppercase } from "./constants";
 
-
 const PokeCard = (props) => {
     const { match, history } = props;
     const { params } = match;
-    const { pokemonId} = params;
-    const [pokemon, setPokemon] = useState(undefined)
+    const { pokemonId } = params;
+    const [pokemon, setPokemon] = useState(undefined);
 
     useEffect(() => {
         axios.get(`https://pokeapi.co/api/v2/pokemon/${pokemonId}/`)
