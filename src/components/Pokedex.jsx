@@ -61,7 +61,7 @@ const Pokedex = (props) => {
     //API call
     useEffect(() => {
         // max limit 893
-          axios.get(`https://pokeapi.co/api/v2/pokemon?limit=151`)
+          axios.get(`https://pokeapi.co/api/v2/pokemon?limit=893`)
             .then((res) => {
                 const { data } = res;
                 const { results } = data;
