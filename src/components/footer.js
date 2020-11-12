@@ -10,8 +10,9 @@ function Footer() {
 
 
     return (<StyledFooter>
-            <p>Made with data from https://pokeapi.co/ </p>
+            <p>Made with data from <a target="blank" href="https://pokeapi.co/">PokéAPI</a>.</p>
             <p>Morgan Williamson, 2020</p>
+            <a target="blank" href="https://github.com/MorganWilliamson/pokeapi-test">GitHub</a>
             </StyledFooter>)
 }
 

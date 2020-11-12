@@ -8,12 +8,10 @@ const StyledHeader = styled.div`
     padding-top: 1%;
 `
 
-
 function Header() {
     
-
     return (<StyledHeader>
-                <h2>Pokédex</h2>
+                <h2>React Pokédex</h2>
                 <Toolbar />
             </StyledHeader>)
 }
